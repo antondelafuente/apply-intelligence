@@ -5,11 +5,11 @@ from fastapi.staticfiles import StaticFiles
 from openai import OpenAI
 from dotenv import load_dotenv
 from urllib.parse import parse_qs
+import os
 
 load_dotenv()
-
 app = FastAPI()
-client = OpenAI()
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))  # Explicitly get the env var
 
 
 @app.post("/api/cover-letter")
