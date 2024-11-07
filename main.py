@@ -21,18 +21,19 @@ async def generate_cover_letter(request: Request):
     job_description = data['job_description'][0]
 
     response = client.chat.completions.create(
-        model="chatgpt-4o-latest",
+        model="gpt-4",
         messages=[{
             "role": "user",
             "content": f"""
-            Generate a professional cover letter that matches the resume experience to the job requirements.
+            Generate a short (~200 words) cover letter that matches the resume experience to the job requirements.
+            Use simple and clear language without too much marketing or sales speak.
             Start directly with "Dear Hiring Manager," and focus on the content only.
             Do not include any header information (no names, dates, addresses, contact info).
 
-            Resume:
+            Here is the resume:
             {resume}
 
-            Job Description:
+            Here is the job description:
             {job_description}
             """
         }]
