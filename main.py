@@ -21,7 +21,7 @@ async def generate_cover_letter(request: Request):
     job_description = data['job_description'][0]
 
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="chatgpt-4o-latest",
         messages=[{
             "role": "user",
             "content": f"""
