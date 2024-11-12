@@ -4,10 +4,10 @@ include:
 
 variables:
   HAS_DEPLOYABLE: "true"
-  QA_DEPLOY_URL: "https://marvin.qa.indeed.tech/projects/hackathon/apply-intelligence"  # Your project name
-  PROD_DEPLOY_URL: "https://marvin.indeed.tech/projects/hackathon/apply-intelligence"   # Your project name
-  PYTHON_BUILD_IMAGE: "harbor.indeed.tech/language-ecosystems/python"
-  PYTHON_BUILD_IMAGE_TAG: "3.11-ubuntu"
+  QA_DEPLOY_URL: "https://marvin.qa.indeed.tech/projects/hackathon/apply-intelligence"
+  PROD_DEPLOY_URL: "https://marvin.indeed.tech/projects/hackathon/apply-intelligence"
+  PYTHON_BUILD_IMAGE: "harbor.indeed.tech/language-ecosystems/python"  # This is correct
+  PYTHON_BUILD_IMAGE_TAG: "v3.10-ubuntu"  # Changed to match other examples
   LEMMA: "false"
   DEPLOY_TO_PROD: "false"
   PRODUCT_GROUP: "hackathon"
