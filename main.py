@@ -40,11 +40,11 @@ def reset_state():
         "resume": None,
         "chat_history": []
     }
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    with open(os.path.join(base_dir, '../jobs.json')) as f:
+    with open('./jobs.json') as f:
         JOBS = json.load(f)['jobs']
-    with open(os.path.join(base_dir, '../resumes.json')) as f:
+    with open('./resumes.json') as f:
         RESUMES = json.load(f)['resumes']
+
 
 reset_state()
 
