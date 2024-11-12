@@ -15,6 +15,6 @@ variables:
   PROD_DEPLOY_URL: ""  # Empty like in working example
 
 Build Deployable:
-  extends: [ .python-build ]
+  extends: [ .python-build, .trr ]
   stage: build
   interruptible: true
