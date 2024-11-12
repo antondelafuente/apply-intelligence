@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Apply Intelligence</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+</head>
+<body class="bg-gray-50">
+<div class="max-w-4xl mx-auto p-4 mt-8"
+     x-data="{
+            isGenerating: false,
+            resume: '',
+            jobDescription: ''
+         }">
+        <textarea
+                name="resume"
+                placeholder="Paste your resume here..."
+                class="w-full p-3 border rounded-lg h-48 mb-4"
+                x-model="resume"
+        ></textarea>
+
+    <textarea
+            name="job_description"
+            placeholder="Paste the job description here..."
+            class="w-full p-3 border rounded-lg h-48 mb-4"
+            x-model="jobDescription"
+    ></textarea>
+
+    <button
+            class="bg-blue-500 text-white px-4 py-2 rounded flex items-center justify-center min-w-[160px] disabled:opacity-50"
+            hx-post="/api/cover-letter"
+            hx-trigger="click"
+            hx-target="#result"
+            hx-include="[name='resume'],[name='job_description']"
+            @htmx:config-request="isGenerating = true"
+            @htmx:after-request="isGenerating = false"
+            :disabled="!resume || !jobDescription || isGenerating"
+    >
+        <span x-show="!isGenerating">Generate Cover Letter</span>
+        <div x-show="isGenerating"
+             class="animate-spin rounded-full h-5 w-5 border-t-2 border-white border-opacity-75 border-l-transparent">
+        </div>
+    </button>
+
+    <div id="result" class="bg-white rounded-lg shadow p-6 mt-4">
+        <!-- Generated cover letter will appear here -->
+    </div>
+</div>
+</body>
+</html>
