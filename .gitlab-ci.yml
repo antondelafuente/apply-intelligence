@@ -1,9 +1,13 @@
-stages:
-  - build
-  - deploy
+include:
+  - project: pipeline/gitlab-pipeline
+    file: /templates/python-golden.yml
 
-build:
-  stage: build
-  image: harbor.indeed.tech/language-ecosystems/nodejs:v20-ubuntu
-  script:
-    - echo "Building app..."
+variables:
+  HAS_DEPLOYABLE: "true"
+  QA_DEPLOY_URL: "https://marvin.qa.indeed.tech/projects/hackathon/apply-intelligence"  # Your project name
+  PROD_DEPLOY_URL: "https://marvin.indeed.tech/projects/hackathon/apply-intelligence"   # Your project name
+  PYTHON_BUILD_IMAGE: "harbor.indeed.tech/language-ecosystems/python"
+  PYTHON_BUILD_IMAGE_TAG: "3.11-ubuntu"
+  LEMMA: "false"
+  DEPLOY_TO_PROD: "false"
+  PRODUCT_GROUP: "hackathon"
