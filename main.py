@@ -10,6 +10,11 @@ load_dotenv()
 app = FastAPI()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+
+@app.get("/info/healthcheck")
+def healthcheck():
+    return {"status": "ok"}
+
 # API Models
 class JobSelect(BaseModel):
     jobId: str
@@ -145,3 +150,9 @@ async def reset():
 
 
 app.mount("/", StaticFiles(directory=".", html=True))
+
+if __name__ == "__main__":
+    import uvicorn
+
+    port = int(os.getenv('PORT', '8080'))  # Default to 8080 for Marvin
+    uvicorn.run(app, host="0.0.0.0", port=port)
