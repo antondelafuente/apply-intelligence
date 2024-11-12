@@ -13,3 +13,8 @@ variables:
   PRODUCT_GROUP: "hackathon"
   QA_DEPLOY_URL: ""  # Empty like in working example
   PROD_DEPLOY_URL: ""  # Empty like in working example
+
+Build Deployable:
+  extends: [ .python-build ]
+  stage: build
+  interruptible: true
