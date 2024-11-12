@@ -1,0 +1,12 @@
+stages:
+  - build
+  - deploy
+
+include:
+  - project: pipeline/gitlab-pipeline
+    file: /templates/single-service-lemma.yml
+
+variables:
+  KUBERNETES_CPU_LIMIT: 2
+  KUBERNETES_MEMORY_LIMIT: 4Gi
+  OPENAI_API_KEY: ${OPENAI_API_KEY}

@@ -1,0 +1,96 @@
+{
+  "resumes": [
+    {
+      "id": "1",
+      "name": "Alex Martinez",
+      "email": "alex.m@email.com",
+      "phone": "555-0123",
+      "summary": "Dynamic professional with 5 years of retail management experience and a passion for education demonstrated through part-time tutoring and mentorship programs. Strong track record in team leadership, customer relations, and project coordination.",
+      "experience": [
+        {
+          "title": "Assistant Store Manager",
+          "company": "Urban Style Retail",
+          "dates": "2020-Present",
+          "points": [
+            "Lead team of 15 sales associates, providing regular training and development",
+            "Increased store revenue by 25% through improved customer service programs",
+            "Coordinate visual merchandising and seasonal promotional events",
+            "Handle conflict resolution and customer escalations professionally"
+          ]
+        },
+        {
+          "title": "Evening Tutor",
+          "company": "Bright Future Education Center",
+          "dates": "2019-Present",
+          "points": [
+            "Tutor high school students in English, Writing, and Communication",
+            "Develop personalized learning plans for students with diverse needs",
+            "Maintain 95% positive feedback rating from students and parents",
+            "Organize monthly student showcase events"
+          ]
+        },
+        {
+          "title": "Sales Associate",
+          "company": "Urban Style Retail",
+          "dates": "2018-2020",
+          "points": [
+            "Consistently exceeded monthly sales targets by 20%",
+            "Trained new employees on store procedures and customer service",
+            "Managed store's social media presence, increasing follower engagement by 40%"
+          ]
+        }
+      ],
+      "education": {
+        "degree": "Bachelor of Arts in Communications",
+        "school": "State University",
+        "gradYear": "2018"
+      }
+    },
+    {
+      "id": "2",
+      "name": "Jordan Taylor",
+      "email": "jordan.t@email.com",
+      "phone": "555-0456",
+      "summary": "Creative and adaptable professional with experience spanning hospitality management and freelance event coordination. Known for strong organizational skills, attention to detail, and ability to build lasting relationships with clients and team members.",
+      "experience": [
+        {
+          "title": "Wedding & Events Coordinator",
+          "company": "Freelance",
+          "dates": "2021-Present",
+          "points": [
+            "Plan and execute 15+ events annually with budgets up to $100,000",
+            "Negotiate with vendors to secure optimal pricing and services",
+            "Create detailed timelines and coordinate all event logistics",
+            "Maintain 100% client satisfaction rate through careful attention to detail"
+          ]
+        },
+        {
+          "title": "Hotel Operations Manager",
+          "company": "Grand Plaza Hotel",
+          "dates": "2018-2021",
+          "points": [
+            "Supervised staff of 25 across front desk, housekeeping, and food service",
+            "Managed guest relations and resolved complex customer service issues",
+            "Coordinated corporate events and conferences for up to 200 attendees",
+            "Implemented new training program reducing staff turnover by 30%"
+          ]
+        },
+        {
+          "title": "Guest Relations Specialist",
+          "company": "Luxury Resorts International",
+          "dates": "2016-2018",
+          "points": [
+            "Handled VIP guest requests and special accommodations",
+            "Created personalized itineraries for long-term guests",
+            "Received Employee of the Year award for exceptional service"
+          ]
+        }
+      ],
+      "education": {
+        "degree": "Bachelor of Science in Hospitality Management",
+        "school": "Coastal University",
+        "gradYear": "2016"
+      }
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Apply Intelligence Test UI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body class="bg-gray-50">
+<div class="max-w-4xl mx-auto p-4 mt-8">
+    <div class="flex gap-4 mb-6">
+        <div>
+            <div class="text-sm text-gray-600 mb-1">Job</div>
+            <select
+                    id="jobSelect"
+                    class="p-2 border rounded"
+                    onchange="selectJob(event)">
+            </select>
+        </div>
+
+        <div>
+            <div class="text-sm text-gray-600 mb-1">Resume</div>
+            <select
+                    id="resumeSelect"
+                    class="p-2 border rounded"
+                    onchange="selectResume(event)">
+            </select>
+        </div>
+
+        <div>
+            <div class="text-sm text-gray-600 mb-1">Current Page</div>
+            <select
+                    id="pageSelect"
+                    class="p-2 border rounded">
+                <option value="skills">Skills</option>
+                <option value="screener">Screener Questions</option>
+                <option value="cover_letter">Cover Letter</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="flex gap-2">
+        <input
+                id="messageInput"
+                type="text"
+                placeholder="Ask a question..."
+                class="flex-1 p-3 border rounded-lg"
+                onkeyup="if(event.key === 'Enter') sendMessage()"
+        />
+
+        <button
+                id="sendButton"
+                onclick="sendMessage()"
+                class="bg-blue-500 text-white px-4 py-2 rounded flex items-center justify-center min-w-[100px] disabled:opacity-50"
+        >
+            Send
+        </button>
+    </div>
+
+    <div id="messages" class="mt-4 space-y-4">
+    </div>
+
+    <button
+            onclick="reset()"
+            class="mt-4 text-sm text-gray-500 hover:text-gray-700"
+    >
+        Reset
+    </button>
+</div>
+
+<script>
+    async function loadJobsAndResumes() {
+        // Load jobs
+        const jobsResponse = await fetch('/api/jobs');
+        const jobsData = await jobsResponse.json();
+        const jobSelect = document.getElementById('jobSelect');
+        jobSelect.innerHTML = jobsData.jobs.map(job =>
+            `<option value="${job.id}">${job.title}</option>`
+        ).join('');
+
+        // Load resumes
+        const resumesResponse = await fetch('/api/resumes');
+        const resumesData = await resumesResponse.json();
+        const resumeSelect = document.getElementById('resumeSelect');
+        resumeSelect.innerHTML = resumesData.resumes.map(resume =>
+            `<option value="${resume.id}">${resume.name}</option>`
+        ).join('');
+
+        // Trigger initial selections
+        await selectJob({target: {value: jobSelect.value}});
+        await selectResume({target: {value: resumeSelect.value}});
+    }
+
+    async function selectJob(event) {
+        const response = await fetch('/api/select_job', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                jobId: event.target.value
+            })
+        });
+        console.log(await response.json());
+    }
+
+    async function selectResume(event) {
+        const response = await fetch('/api/select_resume', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                resumeId: event.target.value
+            })
+        });
+        console.log(await response.json());
+    }
+
+    async function sendMessage() {
+        const messageInput = document.getElementById('messageInput');
+        const messagesDiv = document.getElementById('messages');
+        const sendButton = document.getElementById('sendButton');
+        const currentPage = document.getElementById('pageSelect').value;
+
+        if (!messageInput.value) return;
+
+        sendButton.disabled = true;
+
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: messageInput.value,
+                    currentPage: currentPage
+                })
+            });
+
+            const data = await response.json();
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'p-4 bg-white rounded shadow';
+            messageDiv.innerHTML =
+                `<div class="text-gray-700 font-bold">You:</div>
+<div class="mb-2">${messageInput.value}</div>
+
+<div class="text-gray-700 font-bold">AI:</div>
+<div>${marked.parse(data.response)}</div>`;
+            messagesDiv.appendChild(messageDiv);
+
+            messageInput.value = '';
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            sendButton.disabled = false;
+        }
+    }
+
+    async function reset() {
+        const response = await fetch('/api/reset', {
+            method: 'POST'
+        });
+        await loadJobsAndResumes(); // Reload and reset selections
+        document.getElementById('messages').innerHTML = '';
+        document.getElementById('messageInput').value = '';
+    }
+
+    // Initialize on page load
+    window.onload = loadJobsAndResumes;
+</script>
+</body>
+</html>

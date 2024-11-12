@@ -1,0 +1,64 @@
+{
+  "jobs": [
+    {
+      "id": "1",
+      "title": "High School English Teacher",
+      "company": "Roosevelt High School",
+      "description": "Roosevelt High School seeks a passionate and innovative English Teacher to join our collaborative faculty. The ideal candidate will inspire students to develop strong analytical and communication skills through literature, writing, and creative expression.\n\nKey Responsibilities:\n- Develop and implement engaging lesson plans for grades 9-12 English courses\n- Foster critical thinking through analysis of classic and contemporary literature\n- Guide students in developing writing skills across various genres\n- Provide constructive feedback on essays and creative writing assignments\n- Collaborate with faculty to support cross-curricular learning\n- Participate in parent-teacher conferences and school events\n\nRequirements:\n- Bachelor's degree in English, Education, or related field\n- Valid state teaching certification\n- Strong classroom management skills\n- Experience with project-based learning\n- Commitment to inclusive teaching practices",
+      "screenerQuestions": [
+        {
+          "id": "1",
+          "question": "Describe a challenging classroom situation you've faced and how you resolved it."
+        },
+        {
+          "id": "2",
+          "question": "How do you make classic literature relevant and engaging for modern students?"
+        },
+        {
+          "id": "3",
+          "question": "What strategies do you use to support students with different reading and writing abilities in the same classroom?"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Real Estate Sales Agent",
+      "company": "Coastal Realty Partners",
+      "description": "Join one of the fastest-growing real estate firms in the region. We're seeking a motivated Real Estate Sales Agent to help clients navigate the exciting journey of buying and selling properties.\n\nKey Responsibilities:\n- Guide clients through the entire real estate transaction process\n- Conduct market research to determine optimal listing prices\n- Host open houses and property viewings\n- Develop and maintain relationships with prospects and past clients\n- Create compelling property listings and marketing materials\n- Negotiate contracts and coordinate with all parties involved in transactions\n\nRequirements:\n- Valid real estate license\n- Strong interpersonal and networking skills\n- Available to work flexible hours including weekends\n- Proven track record in customer service\n- Basic understanding of property law and market trends",
+      "screenerQuestions": [
+        {
+          "id": "1",
+          "question": "Describe your approach to building and maintaining a client network."
+        },
+        {
+          "id": "2",
+          "question": "How would you handle a situation where a client's desired price is significantly above market value?"
+        },
+        {
+          "id": "3",
+          "question": "What strategies would you use to stand out in a competitive market?"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Corporate Event Planner",
+      "company": "EventWorks Solutions",
+      "description": "EventWorks Solutions is looking for a detail-oriented Corporate Event Planner to join our dynamic team. This role focuses on creating seamless, memorable experiences for our Fortune 500 clients.\n\nKey Responsibilities:\n- Manage full-cycle event planning from concept to execution\n- Coordinate venues, vendors, catering, and entertainment\n- Develop and track event budgets ranging from $50,000 to $500,000\n- Create detailed event timelines and production schedules\n- Manage multiple events simultaneously while maintaining attention to detail\n- Handle last-minute changes and solve problems quickly\n\nRequirements:\n- 3+ years of corporate event planning experience\n- Proven experience managing large-scale events (500+ attendees)\n- Strong vendor negotiation skills\n- Excellent budget management abilities\n- Proficiency in event planning software\n- Available for occasional travel and evening events",
+      "screenerQuestions": [
+        {
+          "id": "1",
+          "question": "Describe the most challenging event you've planned and how you ensured its success."
+        },
+        {
+          "id": "2",
+          "question": "How do you handle unexpected issues during an event?"
+        },
+        {
+          "id": "3",
+          "question": "What's your process for staying within budget while exceeding client expectations?"
+        }
+      ]
+    }
+  ]
+}
