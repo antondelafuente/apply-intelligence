@@ -112,17 +112,8 @@
         </svg>
     </button>
     <h2 class="text-2xl font-semibold mb-4">Answer the questions from the employer</h2>
-    <div class="mb-4">
-        <label class="block mb-2 font-semibold">1. What makes you a good fit for this role?</label>
-        <textarea id="question1" class="w-full p-3 border rounded-md"></textarea>
-    </div>
-    <div class="mb-4">
-        <label class="block mb-2 font-semibold">2. Describe a challenge you've overcome at work.</label>
-        <textarea id="question2" class="w-full p-3 border rounded-md"></textarea>
-    </div>
-    <div class="mb-4">
-        <label class="block mb-2 font-semibold">3. Why do you want to work for our company?</label>
-        <textarea id="question3" class="w-full p-3 border rounded-md"></textarea>
+    <div id="screenerQuestions">
+        <!-- Questions will be populated here dynamically -->
     </div>
     <div class="absolute bottom-4 left-0 right-0 px-8">
         <button onclick="nextStep('cover-letter-section')" class="w-full py-2 px-4 bg-blue-500 text-white rounded-md">
@@ -247,7 +238,7 @@
                 })
             });
         } else if (type === 'job') {
-            // Keep your existing UI logic
+            // Existing UI selection code
             document.querySelectorAll('#jobOptions .card').forEach(card => {
                 card.classList.remove('selected');
             });
@@ -255,7 +246,7 @@
             selectedJob = cardId;
             document.getElementById('jobContinue').disabled = false;
 
-            // Add the API call
+            // Make API call for job selection
             await fetch('/api/select_job', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -263,6 +254,19 @@
                     jobId: cardId
                 })
             });
+
+            // Get job data and update screener questions
+            const response = await fetch('/api/jobs');
+            const jobsData = await response.json();
+            const job = jobsData.jobs.find(j => j.id === cardId);
+
+            const screenerQuestions = document.getElementById('screenerQuestions');
+            screenerQuestions.innerHTML = job.screenerQuestions.map((q, index) => `
+        <div class="mb-4">
+            <label class="block mb-2 font-semibold">${index + 1}. ${q.question}</label>
+            <textarea id="question${index + 1}" class="w-full p-3 border rounded-md"></textarea>
+        </div>
+    `).join('');
         }
     }
 
