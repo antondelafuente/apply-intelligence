@@ -77,10 +77,15 @@ async def select_resume(resume: ResumeSelect):
 
 
 PAGE_CONTEXTS = {
+    "profile": """
+      On this page the user will select which job seeker profile and corresponding resume.
+    """,
+    "jobs": """
+      On this page, the user will select which job to apply to
+    """,
     "skills": """
        Based on the user's resume and the job description, suggest 3-5 most relevant skills as simple bullet points.
    """,
-
     "screener": """
        For these screening questions:
        {screener_questions}

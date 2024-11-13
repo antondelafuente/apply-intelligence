@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined Multi-Step Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        .selected {
+            border-color: #2563eb; /* Tailwind's blue-500 */
+            background-color: #ebf2ff; /* Light blue to indicate selection */
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex justify-center items-start min-h-screen">
+
+<!-- Step 1: Select a Profile -->
+<div id="profile-section" class="step w-full max-w-md p-8 bg-white shadow-md rounded-md min-h-[80vh] relative">
+    <div style="padding-top: 2rem;"> <!-- Padding added to align as if there's a back arrow -->
+        <h2 class="text-2xl font-semibold mb-4">Select a Profile</h2>
+        <div id="profileOptions" class="grid gap-4">
+            <div onclick="selectCard('profile1', 'profile')" id="profile1"
+                 class="card p-4 border rounded-md cursor-pointer hover:bg-gray-100">
+                <h3 class="font-bold text-lg">Profile 1</h3>
+                <p class="text-gray-600">This is a general user profile suitable for beginners.</p>
+            </div>
+            <div onclick="selectCard('profile2', 'profile')" id="profile2"
+                 class="card p-4 border rounded-md cursor-pointer hover:bg-gray-100">
+                <h3 class="font-bold text-lg">Profile 2</h3>
+                <p class="text-gray-600">This profile is for more advanced users with prior experience.</p>
+            </div>
+            <div onclick="selectCard('profile3', 'profile')" id="profile3"
+                 class="card p-4 border rounded-md cursor-pointer hover:bg-gray-100">
+                <h3 class="font-bold text-lg">Profile 3</h3>
+                <p class="text-gray-600">This profile is designed for professionals looking to specialize.</p>
+            </div>
+        </div>
+    </div>
+    <div class="absolute bottom-4 left-0 right-0 px-8">
+        <button onclick="nextStep('job-section')" class="w-full py-2 px-4 bg-blue-500 text-white rounded-md"
+                id="profileContinue" disabled>
+            Continue
+        </button>
+    </div>
+</div>
+
+<!-- Step 2: Select a Job -->
+<div id="job-section" class="step w-full max-w-md p-8 bg-white shadow-md rounded-md min-h-[80vh] relative hidden">
+    <!-- Back Arrow Button -->
+    <button onclick="previousStep('profile-section')" class="mb-4 text-gray-500 hover:text-gray-700 -ml-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+                  d="M10 18a1 1 0 01-.707-.293l-7-7a1 1 0 010-1.414l7-7a1 1 0 111.414 1.414L4.414 10l6.293 6.293A1 1 0 0110 18z"
+                  clip-rule="evenodd"/>
+        </svg>
+    </button>
+    <h2 class="text-2xl font-semibold mb-4">Select a Job</h2>
+    <div id="jobOptions" class="grid gap-4">
+        <div onclick="selectCard('job1', 'job')" id="job1"
+             class="card p-4 border rounded-md cursor-pointer hover:bg-gray-100">
+            <h3 class="font-bold text-lg">Job 1</h3>
+            <p class="text-gray-600">A junior developer role with focus on front-end technologies.</p>
+        </div>
+        <div onclick="selectCard('job2', 'job')" id="job2"
+             class="card p-4 border rounded-md cursor-pointer hover:bg-gray-100">
+            <h3 class="font-bold text-lg">Job 2</h3>
+            <p class="text-gray-600">A mid-level backend developer position in a growing startup.</p>
+        </div>
+        <div onclick="selectCard('job3', 'job')" id="job3"
+             class="card p-4 border rounded-md cursor-pointer hover:bg-gray-100">
+            <h3 class="font-bold text-lg">Job 3</h3>
+            <p class="text-gray-600">A senior full-stack developer role for experienced professionals.</p>
+        </div>
+    </div>
+    <div class="absolute bottom-4 left-0 right-0 px-8">
+        <button onclick="nextStep('skills-section')" class="w-full py-2 px-4 bg-blue-500 text-white rounded-md"
+                id="jobContinue" disabled>
+            Continue
+        </button>
+    </div>
+</div>
+
+<!-- Step 3: Skills Section -->
+<div id="skills-section" class="step w-full max-w-md p-8 bg-white shadow-md rounded-md min-h-[80vh] relative hidden">
+    <!-- Back Arrow Button -->
+    <button onclick="previousStep('job-section')" class="mb-4 text-gray-500 hover:text-gray-700 -ml-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+                  d="M10 18a1 1 0 01-.707-.293l-7-7a1 1 0 010-1.414l7-7a1 1 0 111.414 1.414L4.414 10l6.293 6.293A1 1 0 0110 18z"
+                  clip-rule="evenodd"/>
+        </svg>
+    </button>
+    <h2 class="text-2xl font-semibold mb-4">Enter Your Skills</h2>
+    <textarea id="skillsInput" placeholder="List your relevant skills here..."
+              class="w-full p-3 border rounded-md mb-4 h-56"></textarea>
+    <div class="absolute bottom-4 left-0 right-0 px-8">
+        <button onclick="nextStep('screener-section')" class="w-full py-2 px-4 bg-blue-500 text-white rounded-md">
+            Continue
+        </button>
+    </div>
+</div>
+
+<!-- Step 4: Screener Questions Section -->
+<div id="screener-section" class="step w-full max-w-md p-8 bg-white shadow-md rounded-md min-h-[80vh] relative hidden">
+    <!-- Back Arrow Button -->
+    <button onclick="previousStep('skills-section')" class="mb-4 text-gray-500 hover:text-gray-700 -ml-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+                  d="M10 18a1 1 0 01-.707-.293l-7-7a1 1 0 010-1.414l7-7a1 1 0 111.414 1.414L4.414 10l6.293 6.293A1 1 0 0110 18z"
+                  clip-rule="evenodd"/>
+        </svg>
+    </button>
+    <h2 class="text-2xl font-semibold mb-4">Answer the questions from the employer</h2>
+    <div class="mb-4">
+        <label class="block mb-2 font-semibold">1. What makes you a good fit for this role?</label>
+        <textarea id="question1" class="w-full p-3 border rounded-md"></textarea>
+    </div>
+    <div class="mb-4">
+        <label class="block mb-2 font-semibold">2. Describe a challenge you've overcome at work.</label>
+        <textarea id="question2" class="w-full p-3 border rounded-md"></textarea>
+    </div>
+    <div class="mb-4">
+        <label class="block mb-2 font-semibold">3. Why do you want to work for our company?</label>
+        <textarea id="question3" class="w-full p-3 border rounded-md"></textarea>
+    </div>
+    <div class="absolute bottom-4 left-0 right-0 px-8">
+        <button onclick="nextStep('cover-letter-section')" class="w-full py-2 px-4 bg-blue-500 text-white rounded-md">
+            Continue
+        </button>
+    </div>
+</div>
+
+<!-- Step 5: Cover Letter Section -->
+<div id="cover-letter-section"
+     class="step w-full max-w-md p-8 bg-white shadow-md rounded-md min-h-[80vh] relative hidden">
+    <!-- Back Arrow Button -->
+    <button onclick="previousStep('screener-section')" class="mb-4 text-gray-500 hover:text-gray-700 -ml-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+                  d="M10 18a1 1 0 01-.707-.293l-7-7a1 1 0 010-1.414l7-7a1 1 0 111.414 1.414L4.414 10l6.293 6.293A1 1 0 0110 18z"
+                  clip-rule="evenodd"/>
+        </svg>
+    </button>
+    <h2 class="text-2xl font-semibold mb-4">Write a Cover Letter</h2>
+    <textarea id="coverLetterInput" placeholder="Write your cover letter here..."
+              class="w-full p-3 border rounded-md mb-4 h-56"></textarea>
+    <div class="absolute bottom-4 left-0 right-0 px-8">
+        <button onclick="submitForm()" class="w-full py-2 px-4 bg-green-500 text-white rounded-md">
+            Submit
+        </button>
+    </div>
+</div>
+
+<div class="fixed bottom-6 right-6">
+    <!-- Chatbot Toggle Button -->
+    <button onclick="toggleChat()"
+            class="chatbot-bubble w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white shadow-lg focus:outline-none">
+        💬
+    </button>
+
+    <!-- Chat Window (Hidden by Default) -->
+    <div id="chatWindow" class="hidden fixed bottom-20 right-6 w-80 bg-white shadow-lg rounded-lg p-4">
+        <div class="flex items-center justify-between mb-3">
+            <h3 class="text-lg font-semibold">Indeed Apply Intelligence</h3>
+            <button onclick="toggleChat()" class="text-gray-400 hover:text-gray-600 focus:outline-none">&times;</button>
+        </div>
+        <div id="chatContent" class="h-48 overflow-y-auto mb-3 border border-gray-200 rounded p-2">
+            <!-- Messages will be dynamically added here -->
+            <div class="text-gray-700 mb-2">
+                <strong>AI:</strong> Hi, how can I help you?
+            </div>
+        </div>
+        <div class="flex items-center">
+            <input type="text" id="userInput" placeholder="Type your question..."
+                   class="flex-grow border border-gray-300 rounded p-2 mr-2 focus:outline-none"
+                   onkeyup="if(event.key === 'Enter') sendMessage()">
+            <button id="sendButton" onclick="sendMessage()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Send
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let selectedProfile = "";
+    let selectedJob = "";
+    let currentPage = "profile";  // Initialize to first page
+
+    const pageMapping = {
+        'profile-section': 'profile',
+        'job-section': 'jobs',
+        'skills-section': 'skills',
+        'screener-section': 'screener',
+        'cover-letter-section': 'cover_letter'
+    };
+
+    async function loadJobsAndResumes() {
+        // Load jobs (we'll use this later for job page)
+        const jobsResponse = await fetch('/api/jobs');
+        const jobsData = await jobsResponse.json();
+
+        // Load resumes and populate profile cards
+        const resumesResponse = await fetch('/api/resumes');
+        const resumesData = await resumesResponse.json();
+
+        const profileOptions = document.getElementById('profileOptions');
+        profileOptions.innerHTML = resumesData.resumes.map(resume => `
+        <div onclick="selectCard('${resume.id}', 'profile')" id="profile${resume.id}"
+             class="card p-4 border rounded-md cursor-pointer hover:bg-gray-100">
+            <h3 class="font-bold text-lg">${resume.name}</h3>
+            ${resume.experience.map(exp => `
+                <p class="text-gray-600">${exp.title} at ${exp.company} (${exp.dates})</p>
+            `).join('')}
+        </div>
+    `).join('');
+
+        const jobOptions = document.getElementById('jobOptions');
+        jobOptions.innerHTML = jobsData.jobs.map(job => `
+    <div onclick="selectCard('${job.id}', 'job')" id="job${job.id}"
+         class="card p-4 border rounded-md cursor-pointer hover:bg-gray-100">
+        <h3 class="font-bold text-lg">${job.title}</h3>
+        <p class="text-gray-600">${job.company}</p>
+    </div>
+`).join('');
+
+        // Keep your trigger initial selections from simple UI
+        await selectCard(resumesData.resumes[0].id, 'profile');
+        await selectCard(jobsData.jobs[0].id, 'job');
+    }
+    // Function to handle card selection
+    async function selectCard(cardId, type) {
+        if (type === 'profile') {
+            // Keep your existing UI logic
+            document.querySelectorAll('#profileOptions .card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.getElementById(`profile${cardId}`).classList.add('selected');
+            selectedProfile = cardId;
+            document.getElementById('profileContinue').disabled = false;
+
+            // Add the API call from your simple UI
+            await fetch('/api/select_resume', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    resumeId: cardId
+                })
+            });
+        } else if (type === 'job') {
+            // Keep your existing UI logic
+            document.querySelectorAll('#jobOptions .card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.getElementById(`job${cardId}`).classList.add('selected');
+            selectedJob = cardId;
+            document.getElementById('jobContinue').disabled = false;
+
+            // Add the API call
+            await fetch('/api/select_job', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    jobId: cardId
+                })
+            });
+        }
+    }
+
+    function nextStep(stepId) {
+        document.querySelectorAll('.step').forEach(step => step.classList.add('hidden'));
+        document.getElementById(stepId).classList.remove('hidden');
+        currentPage = pageMapping[stepId];  // Set current page
+    }
+
+    function previousStep(stepId) {
+        document.querySelectorAll('.step').forEach(step => step.classList.add('hidden'));
+        document.getElementById(stepId).classList.remove('hidden');
+        currentPage = pageMapping[stepId];  // Set current page
+    }
+
+    // Function to submit the form data
+    function submitForm() {
+        const profile = selectedProfile;
+        const job = selectedJob;
+        const skills = document.getElementById('skillsInput').value;
+        const question1 = document.getElementById('question1').value;
+        const question2 = document.getElementById('question2').value;
+        const question3 = document.getElementById('question3').value;
+        const coverLetter = document.getElementById('coverLetterInput').value;
+
+        // For now, just log the data
+        console.log("Profile:", profile);
+        console.log("Job:", job);
+        console.log("Skills:", skills);
+        console.log("Question 1:", question1);
+        console.log("Question 2:", question2);
+        console.log("Question 3:", question3);
+        console.log("Cover Letter:", coverLetter);
+
+        alert("Form submitted successfully!");
+    }
+
+    function toggleChat() {
+        const chatWindow = document.getElementById("chatWindow");
+        chatWindow.classList.toggle("hidden");
+    }
+
+    // Handle sending messages
+    async function sendMessage() {
+        const messageInput = document.getElementById('userInput');
+        const chatContent = document.getElementById('chatContent');
+        const sendButton = document.getElementById('sendButton');
+
+        if (!messageInput.value) return;
+
+        // User message
+        const userMessage = document.createElement('div');
+        userMessage.className = 'text-gray-700 mb-2';
+        userMessage.innerHTML = `<strong>You:</strong> ${messageInput.value}`;
+        chatContent.appendChild(userMessage);
+
+        sendButton.disabled = true;
+
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: messageInput.value,
+                    currentPage: currentPage
+                })
+            });
+
+            const data = await response.json();
+
+            const botMessage = document.createElement('div');
+            botMessage.className = 'text-gray-700 mb-2';
+            botMessage.innerHTML = `<strong>AI:</strong> ${marked.parse(data.response)}`;
+            chatContent.appendChild(botMessage);
+
+            // Scroll to bottom
+            chatContent.scrollTop = chatContent.scrollHeight;
+
+            messageInput.value = '';
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            sendButton.disabled = false;
+        }
+    }
+
+    window.onload = loadJobsAndResumes;
+</script>
+
+</body>
+</html>
